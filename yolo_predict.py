@@ -8,8 +8,11 @@ import cv2
 import pandas as pd
 
 # Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5x')
-
+#model = torch.hub.load('ultralytics/yolov5', 'yolov5x')
+new_weights = './run/weights/best.pt'
+#device = torch.device("cpu")
+#model = torch.load(new_weights,map_location=device)['model'].to(device)
+model = torch.hub.load('./','custom',new_weights,source='local')
 '''
 # Images
 img1 = Image.open('C:/MinneApple/detection.tar/detection/train/images/*')  # PIL image
@@ -17,12 +20,12 @@ img1 = Image.open('C:/MinneApple/detection.tar/detection/train/images/*')  # PIL
 imgs = [img1]  # batch of images
 '''
 
-ROOT_PATH = './Data/test/images'
+ROOT_PATH = './9th-images'
 
 for fname in os.listdir(ROOT_PATH):
     # Inference
     images = np.array(Image.open(os.path.join(ROOT_PATH, fname)))
-    results = model(images, size=640)  # includes NMS
+    results = model(images, size=1280)  # includes NMS
 
     # Results
     results.print()
