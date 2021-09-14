@@ -25,14 +25,12 @@ ROOT_PATH = './9th-images'
 for fname in os.listdir(ROOT_PATH):
     # Inference
     images = np.array(Image.open(os.path.join(ROOT_PATH, fname)))
-    results = model(images, size=1280)  # includes NMS
+    results = model(images, size=2800)  # includes NMS
 
     # Results
     results.print()
     # results.show()  # or .show()
     # results.save()
-
-    save_file = './yolo-x.csv'
 
     results = results.pandas().xyxy[0]  # img1 predictions (pandas)
 
